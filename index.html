@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/2f30c22c4d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+    <title>Create notes</title>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fa-solid fa-scroll"></i>Create notes</h1>
+        <button id="btn">Create notes</button>
+        <div class="notes">
+            <p contenteditable="true" class="input-box">
+                <i class="fa-solid fa-trash-can"></i>
+            </p>
+
+        </div>
+    </div>
+
+    <script>
+        const btn = document.querySelector('#btn')
+        const textArea = document.querySelector('.notes')
+        btn.addEventListener('click', ()=>
+        textArea.classList.toggle('notes-hide')
+        )
+    </script>
+</body>
+</html>
