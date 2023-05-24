@@ -13,19 +13,55 @@
         <h1><i class="fa-solid fa-scroll"></i>Create notes</h1>
         <button id="btn">Create notes</button>
         <div class="notes">
-            <p contenteditable="true" class="input-box">
-                <i class="fa-solid fa-trash-can"></i>
-            </p>
+            <!-- <p contenteditable="true" class="input-box">
+               <img src="del.jpg">
+            </p> -->
 
         </div>
     </div>
 
     <script>
         const btn = document.querySelector('#btn')
-        const textArea = document.querySelector('.notes')
-        btn.addEventListener('click', ()=>
-        textArea.classList.toggle('notes-hide')
+        const notesArea = document.querySelector('.notes')
+        const notes = document.querySelectorAll('.input-box')
+        
+        function showNotes(){
+            notesArea.innerHTML = localStorage.getItem('notes')
+        }
+        showNotes()
+        function updateStorage(){
+            localStorage.setItem('notes', notesArea.innerHTML)
+        }
+
+        btn.addEventListener('click', ()=>{
+            let inputBox = document.createElement('p')
+            let img = document.createElement('img')
+            inputBox.className = 'input-box'
+            img.src = 'del.jpg'
+            inputBox.setAttribute('contenteditable','true')
+            notesArea.appendChild(inputBox).appendChild(img)
+        }
         )
+        notesArea.addEventListener("click", (e)=>{
+            if(e.target.tagName === 'IMG'){
+                e.target.parentElement.remove()
+                updateStorage()
+            }else if(e.target.tagName === 'p'){
+                notes = document.querySelectorAll('input-box');
+                notes.forEach(nt =>{
+                    nt.onkeyup = function(){
+                        updateStorage()
+                    }
+                })
+            }
+        })
+       
+document.addEventListener('keydown', event=>{
+    if(event.key === 'Enter'){
+        document.execCommand('insertLineBreak')
+        event.preventDefault()
+    }
+})
     </script>
 </body>
 </html>
